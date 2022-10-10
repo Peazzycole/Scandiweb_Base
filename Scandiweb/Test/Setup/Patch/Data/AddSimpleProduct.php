@@ -17,6 +17,12 @@ use Magento\Store\Model\StoreManagerInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterface;
 use Magento\InventoryApi\Api\Data\SourceItemInterfaceFactory;
 use Magento\InventoryApi\Api\SourceItemsSaveInterface;
+use Exception;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\StateException;
+use Magento\Framework\Validation\ValidationException;
 
 
 class AddSimpleProduct implements DataPatchInterface
@@ -105,11 +111,12 @@ class AddSimpleProduct implements DataPatchInterface
         $this->categoryLink = $categoryLink;
     }
 
+
     /**
-     * @return AddSimpleProduct|void
-     * @throws \Exception
+     * @return void
+     * @throws Exception
      */
-    public function apply()
+    public function apply(): void
     {
         // run setup in back-end area
         $this->appState->emulateAreaCode('adminhtml', [$this, 'execute']);
@@ -117,13 +124,13 @@ class AddSimpleProduct implements DataPatchInterface
 
     /**
      * @return void
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @throws \Magento\Framework\Exception\InputException
-     * @throws \Magento\Framework\Exception\LocalizedException
-     * @throws \Magento\Framework\Exception\StateException
-     * @throws \Magento\Framework\Validation\ValidationException
+     * @throws CouldNotSaveException
+     * @throws InputException
+     * @throws LocalizedException
+     * @throws StateException
+     * @throws ValidationException
      */
-    public function execute()
+    public function execute(): void
     {
         // create the product
         $product = $this->productInterfaceFactory->create();
@@ -162,17 +169,17 @@ class AddSimpleProduct implements DataPatchInterface
     }
 
     /**
-     * @return array|string[]
+     * @return array
      */
-    public static function getDependencies()
+    public static function getDependencies(): array
     {
         return [];
     }
 
     /**
-     * @return array|string[]
+     * @return array
      */
-    public function getAliases()
+    public function getAliases(): array
     {
         return [];
     }
