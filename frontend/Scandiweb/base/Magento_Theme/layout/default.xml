@@ -8,9 +8,11 @@
                 <argument name="logo_alt" xsi:type="string">Scandiweb</argument>
             </arguments>
         </referenceBlock>
-        <referenceContainer name="header.container">
-            <block name="header_free_shipping" ifconfig="carriers/freeshipping/active" template="Magento_Theme::header_shipping.phtml" before="header.panel.wrapper" />
-        </referenceContainer>   
+
     </body>
-    
+    <referenceContainer name="header.container">
+        <container name="free.shipping.container" htmlTag="div" htmlClass="free-shipping-class" before="header.panel.wrapper">
+            <block name="header_free_shipping" ifconfig="carriers/freeshipping/active" template="Magento_Theme::header_shipping.phtml"/>
+        </container>
+    </referenceContainer>
 </page>
